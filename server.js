@@ -12,9 +12,16 @@ const app = express();
 
 // middleware
 // app.use(cors());
+// app.use(cors({
+//   origin:[ "https://jwt-cookies-frontend.vercel.app","http://localhost:5173"],
+//   credentials: true,
+// }));
 app.use(cors({
-  origin:[ "https://jwt-cookies-frontend.vercel.app","http://localhost:5173"],
-  credentials: true,
+  origin: [
+    "http://localhost:5173",
+    "https://jwt-cookies-frontend.vercel.app"
+  ],
+  credentials: true
 }));
 app.use(express.json());
 app.use(cookieParser());
