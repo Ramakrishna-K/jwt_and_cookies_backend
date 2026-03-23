@@ -62,7 +62,9 @@ export const loginUser = async (req, res) => {
 
         res.cookie("accessToken", accessToken, {
             httpOnly: true,
-            maxAge: 15 * 60 * 1000, // 1 minute
+            // maxAge: 15 * 60 * 1000, // 1 minute
+                        maxAge: 60 * 1000, // 1 minute
+
             sameSite: "None",
             secure: true, // set true in production with HTTPS
         })
@@ -71,7 +73,9 @@ export const loginUser = async (req, res) => {
             httpOnly: true,
             secure: true, // true in production (HTTPS)
             sameSite: "None",
-            maxAge: 7 * 60 * 60 * 1000, // 7 days
+            // maxAge: 7 * 60 * 60 * 1000, // 7 days
+                        maxAge: 60 * 1000, // 1 minute
+
         });
 
         res.json({ accessToken, message: "Login success ✅" });
