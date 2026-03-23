@@ -63,14 +63,14 @@ export const loginUser = async (req, res) => {
         res.cookie("accessToken", accessToken, {
             httpOnly: true,
             maxAge: 15 * 60 * 1000, // 1 minute
-            sameSite: "Strict",
-            secure: false, // set true in production with HTTPS
+            sameSite: "None",
+            secure: true, // set true in production with HTTPS
         })
         // 🍪 Set refresh token cookie
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
-            secure: false, // true in production (HTTPS)
-            sameSite: "lax",
+            secure: true, // true in production (HTTPS)
+            sameSite: "None",
             maxAge: 7 * 60 * 60 * 1000, // 7 days
         });
 
