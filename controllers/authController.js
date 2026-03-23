@@ -60,23 +60,40 @@ export const loginUser = async (req, res) => {
         const accessToken = generateAccessToken(user);
         const refreshToken = generateRefreshToken(user);
 
-        res.cookie("accessToken", accessToken, {
-            httpOnly: true,
-            // maxAge: 15 * 60 * 1000, // 1 minute
-                        maxAge: 60 * 1000, // 1 minute
+        // res.cookie("accessToken", accessToken, {
+        //     httpOnly: true,
+        //     // maxAge: 15 * 60 * 1000, // 1 minute
+        //                 maxAge: 60 * 1000, // 1 minute
 
-            sameSite: "None",
-            secure: true, // set true in production with HTTPS
-        })
-        // 🍪 Set refresh token cookie
-        res.cookie("refreshToken", refreshToken, {
-            httpOnly: true,
-            secure: true, // true in production (HTTPS)
-            sameSite: "None",
-            // maxAge: 7 * 60 * 60 * 1000, // 7 days
-                        maxAge: 60 * 1000, // 1 minute
+        //     sameSite: "None",
+        //     secure: true, // set true in production with HTTPS
+        // })
+        // // 🍪 Set refresh token cookie
+        // res.cookie("refreshToken", refreshToken, {
+        //     httpOnly: true,
+        //     secure: true, // true in production (HTTPS)
+        //     sameSite: "None",
+        //     // maxAge: 7 * 60 * 60 * 1000, // 7 days
+        //                 maxAge: 60 * 1000, // 1 minute
 
-        });
+        // });
+
+
+        // 🍪 Access Token (short life)
+res.cookie("accessToken", accessToken, {
+  httpOnly: true,
+  secure: true,          // ✅ MUST be true for HTTPS
+  sameSite: "None",      // ✅ Required for cross-site cookies
+  maxAge: 15 * 60 * 1000 // 15 minutes
+});
+
+// 🍪 Refresh Token (long life)
+res.cookie("refreshToken", refreshToken, {
+  httpOnly: true,
+  secure: true,           // ✅ HTTPS only
+  sameSite: "None",
+  maxAge: 7 * 24 * 60 * 60 * 1000 // ✅ 7 days
+});
 
         res.json({ accessToken, message: "Login success ✅" });
 
