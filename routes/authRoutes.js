@@ -19,7 +19,7 @@ router.post("/login", loginUser);
 router.post("/refresh", refreshToken); // ✅ THIS IS WHERE IT GOES
 
 // Protected route
-router.get("/dashboard", protect, getDashboard);
+router.get("auth/dashboard", protect, getDashboard);
 router.post("/logout", logoutUser); // ✅ THIS LINE IS MUST
 
 export default router;
