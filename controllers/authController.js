@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 
 // 🔐 Access Token (short life)
 const generateAccessToken = (user) => {
-    return jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1m" });
+    return jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "15m" });
 };
 
 // 🔄 Refresh Token (long life)
