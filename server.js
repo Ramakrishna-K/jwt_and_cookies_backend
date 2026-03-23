@@ -13,7 +13,7 @@ const app = express();
 
 app.use(cors({
   origin: [
-    "http://localhost:5173",
+
     "https://jwt-cookies-frontend.vercel.app"
   ],
   credentials: true
