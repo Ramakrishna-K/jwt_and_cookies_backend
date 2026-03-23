@@ -60,18 +60,18 @@ export const loginUser = async (req, res) => {
         const accessToken = generateAccessToken(user);
         const refreshToken = generateRefreshToken(user);
 
-        // res.cookie("accessToken", accessToken, {
-        //     httpOnly: true,
-        //     maxAge: 30 * 1000, // 1 minute
-        //     sameSite: "Strict",
-        //     secure: false, // set true in production with HTTPS
-        // })
+        res.cookie("accessToken", accessToken, {
+            httpOnly: true,
+            maxAge: 15 * 60 * 1000, // 1 minute
+            sameSite: "Strict",
+            secure: false, // set true in production with HTTPS
+        })
         // 🍪 Set refresh token cookie
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
             secure: false, // true in production (HTTPS)
             sameSite: "lax",
-            maxAge: 60 * 1000, // 7 days
+            maxAge: 7 * 60 * 60 * 1000, // 7 days
         });
 
         res.json({ accessToken, message: "Login success ✅" });
